@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 .hover-fade {
-    transition: color 0.3s ease-in-out;
+    transition: color 0.15s ease-in-out;
   }
 
 .hover-fade:hover {
