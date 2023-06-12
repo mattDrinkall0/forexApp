@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.data-table th {
+  @apply py-4 px-3 font-semibold;
+}
+
+.data-table tr {
+  @apply border-t;
+}
+
+.data-table td {
+  @apply p-2;
+}
