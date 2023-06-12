@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// 'status' can be either "customer", "employee" or "manager"
+model User {
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
+  firstName        String
+  lastName         String
+  password         String
+  session          Session?
+}
+
+// This is a user's browser session, to keep them logged in etc.
+model Session {
+  id     String   @id
+  user   User     @relation(fields: [userId], references: [id])
+  userId Int      @unique
+}
