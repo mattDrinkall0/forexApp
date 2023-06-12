@@ -1,3 +1,11 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.hover-fade {
+    transition: color 0.3s ease-in-out;
+  }
+
+.hover-fade:hover {
+  color: #2196f3; /* Replace with your desired hover color */
+}

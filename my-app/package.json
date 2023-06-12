@@ -25,6 +25,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^4.15.0"
+		"@prisma/client": "^4.15.0",
+		"bcrypt": "^5.1.0",
+		"zod": "^3.21.4"
 	}
 }

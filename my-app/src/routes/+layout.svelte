@@ -4,36 +4,38 @@
 </script>
 
 <header
-  class="flex justify-between py-8 px-10 max-w-screen-2xl mx-auto items-center"
+  class="flex justify-between py-8 px-10 max-w-screen-2xl mx-auto items-center dark:bg-bodybg dark:text-white"
 >
-  <a href="/" class="text-xl">
+  <a href="/" class="text-xl hover-fade">
     <span class="font-bold">Alpha</span>Forex
   </a>
 
   <nav class="flex gap-10">
     {#if $page.data.user}
-    <a href="/mystocks">My Stocks</a>
-    <a href="/news">News</a>
-    <a href="/about">About Us</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/account">Account</a>
+    <a href="/mystocks" class="hover-fade">My Stocks</a>
+    <a href="/news" class="hover-fade">News</a>
+    <a href="/about" class="hover-fade">About Us</a>
+    <a href="/pricing" class="hover-fade">Pricing</a>
+    <a href="/account" class="hover-fade">Account</a>
 
     <form method="POST" action="/logout">
-      <button type="submit">Log Out</button>
+      <button class="hover-fade" type="submit">Log Out</button>
     </form>
     {:else}
-      <a href="/news">News</a>
-      <a href="/about">About Us</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
+      <a href="/news" class="hover-fade">News</a>
+      <a href="/about" class="hover-fade">About Us</a>
+      <a href="/pricing" class="hover-fade">Pricing</a>
+      <a href="/login" class="hover-fade">Login</a>
+      <a href="/create-account" class="hover-fade">Sign Up</a>
     {/if}
   </nav>
 </header>
 
-<main class="mx-auto max-w-6xl">
-  <slot />
-</main>
+<div class="bg-white dark:bg-navbg dark:text-white dark:caret-blue">
+  <div class="max-w-screen-2xl mx-auto py-8 px-10 min-h-screen">
+    <slot />
+  </div>
+</div>
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
