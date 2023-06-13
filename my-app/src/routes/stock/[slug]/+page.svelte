@@ -9,6 +9,6 @@
     <h1 class="text-6xl font-bold max-w-3xl mx-auto">{data.name}</h1>
     <p>{data.symbol}</p>
 {:else}
-    <h2>Please Log in to access the predictions</h2>
+    <h2>Please <a href="/login" class="text-blue">Log In</a> to access the predictions</h2>
 {/if}
 </div>

@@ -29,12 +29,25 @@
   // Reactive background 
   let svg;
 
+  const colors = {
+  dark: {
+    solidPath: '#00FF00', // white for dark mode
+    dashedPath: '#dddddd', // light grey for dark mode
+    endPoint: '#2196f3' // white for dark mode
+  },
+  light: {
+    solidPath: '#2196f3', // black for light mode
+    dashedPath: '#aaaaaa', // dark grey for light mode
+    endPoint: '#000000' // black for light mode
+  }
+};
+
   onMount(() => {
     const width = window.innerWidth;
-    const height = window.innerHeight;
+    const height = window.innerHeight-100;
 
-    const points = 50;  // Reduce number of points
-    const volatility = 50;  // Reduce volatility
+    const points = 150  ;  // Reduce number of points
+    const volatility = 60;  // Reduce volatility
 
     svg = d3.select('#svg')
       .attr('width', width)
@@ -48,11 +61,14 @@
     const line = d3.line()
       .x(d => d.x)
       .y(d => d.y);
+    
+    const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
 
     const solidPath = svg.append('path')
       .datum(lineData)
       .attr('d', line)
-      .attr('stroke', 'black')
+      .attr('stroke', colors[theme].solidPath)
+      .attr('stroke-width', 2)
       .attr('fill', 'none');
 
     const dashedPath = svg.append('line')
@@ -60,7 +76,7 @@
       .attr('y1', height)
       .attr('x2', width)
       .attr('y2', 0)
-      .attr('stroke', 'grey')
+      .attr('stroke', colors[theme].dashedPath)
       .attr('stroke-dasharray', '5,5');
 
     const yScale = d3.scaleLinear()
@@ -69,8 +85,8 @@
 
     // Append a line for the end point
     const endPoint = svg.append('line')
-      .attr('stroke', 'black')
-      .attr('stroke-width', '1');
+      .attr('stroke', colors[theme].endPoint)
+      .attr('stroke-width', '2');
 
     svg.on('mousemove', event => {
       const mouseX = d3.pointer(event)[0];
@@ -89,7 +105,7 @@
         .attr('height', height);
 
       // Update the position and dimensions of the line
-      endPoint.attr('x1', mouseX).attr('y1', yScale(mouseX) - 20).attr('x2', mouseX).attr('y2', yScale(mouseX) + 20);
+      endPoint.attr('x1', mouseX).attr('y1', yScale(mouseX) - 30).attr('x2', mouseX).attr('y2', yScale(mouseX) + 30);
     });
 });
 
@@ -103,18 +119,21 @@
 
       <div class="flex flex-col items-center justify-center my-16 relative z-10">
         <input class="
-        w-1/3 px-3 py-2 rounded-full border-2 border-black focus:outline-none focus:shadow-outline 
-        dark:bg-lightbg" 
+        w-1/3 px-5 py-3 rounded-full border-2 border-black focus:outline-none focus:shadow-outline 
+        dark:bg-lightbg
+        dark:border-none
+        focus:rounded-bl-none focus:rounded-br-none focus:rounded-tl-md focus:rounded-tr-md" 
         type="text" placeholder="Enter Stock..."
         bind:value={search} />
 
         {#if search !== ''}
-            <div class= "w-1/3 bg-white text-black shadow-lg max-h-60 rounded-lg overflow-auto cursor-pointer">
+            <div class= "w-1/3 bg-white text-black shadow-lg max-h-60 rounded-bl-lg rounded-br-lg overflow-auto cursor-pointer dark:bg-medbg
+            dark:border-none dark:text-white">
                 {#if results.length === 0}
                     <div class="px-4 py-2">No results found</div>
                 {:else}
                     {#each results as result, i}
-                        <div class="border-t border-gray-100 first:border-t-0 px-4 py-2 hover:bg-blue" data-result={i} 
+                        <div class="border-t border-gray dark:border-white first:border-t-0 px-4 py-2 hover:bg-blue text-left" data-result={i} 
                         on:click={() => selectSymbol(result.symbol)}>
                             <p>{ result.name} - <i>{ result.symbol }</i></p>
                         </div>
@@ -128,11 +147,11 @@
         {/if}
       </div>
 
-    <div class="fixed bottom-0 right-0 p-4">
+    <div class="fixed bottom-0 right-0 p-4 z-10">
       <a href="/help" class="text-black rounded-full px-4 py-2 dark:text-white">Help</a>
       
     </div>
 
-    <svg class="absolute inset-0 w-full h-full" id="svg" />
+    <svg class="absolute inset-0 max-w-full min-h-full" id="svg" />
   </div>
   

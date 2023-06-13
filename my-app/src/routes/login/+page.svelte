@@ -10,7 +10,7 @@
   {#if form?.messages}
     {#each form?.messages as message}
       <ul
-        class="bg-red-100 border-red-300 border-2 p-6 mt-3 mb-6 rounded-md text-red list-disc"
+        class="bg-red-100 border-red-300 border-2 p-6 mt-3 mb-6 rounded-md text-red list-disc dark:bg-lightbg dark:border-none dark:text-red"
       >
         <li class="ml-4">{message}</li>
       </ul>
@@ -19,25 +19,23 @@
 
   <form method="POST" class="flex flex-col gap-4" use:enhance>
     <div class="flex flex-col">
-      <label for="email" class="ml-3">Email Address</label>
-      <input type="email" name="email" id="email" value={form?.email ?? ""} />
+      <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" type="email" name="email" id="email" value={form?.email ?? ""} placeholder="Email"/>
     </div>
 
     <div class="flex flex-col">
-      <label for="password" class="ml-3">Password</label>
-      <input type="password" name="password" id="password" />
+      <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" type="password" name="password" id="password" placeholder="Password" />
     </div>
 
     <button
       type="submit"
-      class="bg-blue text-white py-3 rounded-md border-2 border-blue-500 my-4"
+      class="bg-blue text-white py-3 rounded-full border-2 border-none hover:bg-medbg my-4"
     >
       Log In
     </button>
   </form>
 
-  <p class="text-center my-6 text-gray-600">
-    Don't have an account? <a href="/create-account" class="text-blue-500"
+  <p class="text-center my-6 text-gray-600 dark:text-gray-400">
+    Don't have an account? <a href="/create-account" class="text-blue"
       >Create one now</a
     >
   </p>
@@ -45,6 +43,6 @@
 
 <style>
   input {
-    @apply border-2 border-gray rounded-md py-2 px-3 my-1;
+    @apply border-2 border-gray-400 py-3 px-5 my-1 rounded-full focus:outline-none focus:shadow-outline focus:bg-gray-100;
   }
 </style>

@@ -18,12 +18,20 @@ module.exports = {
       'bodybg': '#212121',
       'blue': '#2196f3',
       'lightbg': '#424242',
+      'medbg': '#313131',
       'red': '#cc0000',
     },
+    
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      inset: {
+        '-5': '-1.25rem',
+        '-10': '2.5rem',
+        '-20': '-5rem'
+       },
+    },
   },
   plugins: [],
 };
