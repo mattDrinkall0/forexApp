@@ -2,6 +2,8 @@
     export let data;
     import { goto } from '$app/navigation';
     import { page } from "$app/stores";
+    import { onMount } from 'svelte';
+    import * as d3 from 'd3';
 
     let search = '';
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'];
@@ -22,6 +24,75 @@
   const selectSymbol = (symbol) => {
     goto(`/stock/${symbol}`);
   };
+
+  
+  // Reactive background 
+  let svg;
+
+  onMount(() => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const points = 50;  // Reduce number of points
+    const volatility = 50;  // Reduce volatility
+
+    svg = d3.select('#svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    const lineData = d3.range(points).map((_, i) => ({
+      x: i * (width / (points - 1)),
+      y: height - (height / (points - 1)) * i + (Math.random() - 0.5) * volatility
+    }));
+
+    const line = d3.line()
+      .x(d => d.x)
+      .y(d => d.y);
+
+    const solidPath = svg.append('path')
+      .datum(lineData)
+      .attr('d', line)
+      .attr('stroke', 'black')
+      .attr('fill', 'none');
+
+    const dashedPath = svg.append('line')
+      .attr('x1', 0)
+      .attr('y1', height)
+      .attr('x2', width)
+      .attr('y2', 0)
+      .attr('stroke', 'grey')
+      .attr('stroke-dasharray', '5,5');
+
+    const yScale = d3.scaleLinear()
+      .domain([0, width])
+      .range([height, 0]);
+
+    // Append a line for the end point
+    const endPoint = svg.append('line')
+      .attr('stroke', 'black')
+      .attr('stroke-width', '1');
+
+    svg.on('mousemove', event => {
+      const mouseX = d3.pointer(event)[0];
+
+      solidPath.attr('clip-path', `url(#clip-left-${mouseX})`);
+      dashedPath.attr('x1', mouseX).attr('y1', yScale(mouseX));
+
+      svg.select(`#clip-left-${mouseX}`).remove();
+
+      svg.append('clipPath')
+        .attr('id', `clip-left-${mouseX}`)
+        .append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', mouseX)
+        .attr('height', height);
+
+      // Update the position and dimensions of the line
+      endPoint.attr('x1', mouseX).attr('y1', yScale(mouseX) - 20).attr('x2', mouseX).attr('y2', yScale(mouseX) + 20);
+    });
+});
+
 </script>
   
   <div class="text-center my-32">
@@ -30,7 +101,7 @@
       Make Money Smarter
     </h1>
 
-      <div class="flex flex-col items-center justify-center my-16">
+      <div class="flex flex-col items-center justify-center my-16 relative z-10">
         <input class="
         w-1/3 px-3 py-2 rounded-full border-2 border-black focus:outline-none focus:shadow-outline 
         dark:bg-lightbg" 
@@ -61,5 +132,7 @@
       <a href="/help" class="text-black rounded-full px-4 py-2 dark:text-white">Help</a>
       
     </div>
+
+    <svg class="absolute inset-0 w-full h-full" id="svg" />
   </div>
   

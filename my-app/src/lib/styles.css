@@ -9,3 +9,12 @@
 .hover-fade:hover {
   color: #2196f3; /* Replace with your desired hover color */
 }
+
+.content {
+  position: relative; /* z-index only works on positioned elements */
+  z-index: 10;
+}
+
+#svg  {
+  z-index: 1;
+}

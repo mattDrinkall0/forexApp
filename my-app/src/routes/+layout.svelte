@@ -4,7 +4,7 @@
 </script>
 
 <header
-  class="flex justify-between py-8 px-10 max-w-screen-2xl mx-auto items-center dark:bg-bodybg dark:text-white"
+  class="flex justify-between py-8 px-10 max-w-screen-2xl mx-auto items-center dark:bg-bodybg dark:text-white relative z-20"
 >
   <a href="/" class="text-xl hover-fade">
     <span class="font-bold">Alpha</span>Forex
@@ -31,7 +31,7 @@
   </nav>
 </header>
 
-<div class="bg-white dark:bg-navbg dark:text-white dark:caret-blue">
+<div class="dark:bg-navbg dark:text-white dark:caret-blue relative z-10">
   <div class="max-w-screen-2xl mx-auto py-8 px-10 min-h-screen">
     <slot />
   </div>
