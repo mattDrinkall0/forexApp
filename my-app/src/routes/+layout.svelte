@@ -1,10 +1,36 @@
 <script>
   import "../app.css";
+  import { onMount, onDestroy } from 'svelte';
   import { page } from "$app/stores";
+
+  let darkMode;
+
+  // Whenever the session changes, update the theme
+  $: {
+    darkMode = $page.data.user?.darkMode ?? false;
+  }
+
+  onMount(() => {
+    function setTheme() {
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    // Whenever the session changes, update the theme
+    setTheme();
+
+    // Cleanup function when the component unmounts
+    return () => {
+      document.documentElement.classList.remove('dark');
+    }
+  });
+
 </script>
 
 <header
-  class="flex justify-between py-5 px-10 max-w-screen-2xl mx-auto items-center dark:bg-navbg dark:text-white relative z-20"
+  class="flex justify-between py-5 px-10 max-w-screen-2xl mx-auto items-center dark:bg-bodybg dark:text-white relative z-20"
 >
   <a href="/" class="text-xl hover-fade">
     <span class="font-bold">Alpha</span>Forex

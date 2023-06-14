@@ -43,6 +43,7 @@
 };
 
   onMount(() => {
+
     const width = window.innerWidth;
     const height = window.innerHeight-100;
 
@@ -143,7 +144,7 @@
         {/if}
 
         {#if !$page.data.user}
-        <p>To Access Predictions you must be <a class="text-blue" href="/login">logged in</a></p>
+        <p class="my-8">To Access Predictions you must be <a class="text-blue" href="/login">logged in</a></p>
         {/if}
       </div>
 
