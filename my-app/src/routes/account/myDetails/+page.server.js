@@ -44,9 +44,11 @@ export const actions = {
   
       const firstName = data.get("firstName");
       const lastName = data.get("lastName");
-      const phoneNumber = data.get("phoneNumber");
+      const phoneNumber = data.get("phone");
       const email = data.get("email");
       const darkModeVal = data.get("darkMode");
+
+      console.log(phoneNumber);
 
       var darkMode;
 
@@ -119,6 +121,7 @@ export const actions = {
                 firstName,
                 lastName,
                 email,
+                phoneNumber: phoneNumber,
                 darkMode: darkMode,
             },
         });

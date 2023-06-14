@@ -19,16 +19,16 @@
 
   <form method="POST" class="flex flex-col gap-4" use:enhance>
     <div class="flex flex-col">
-      <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" type="email" name="email" id="email" value={form?.email ?? ""} placeholder="Email"/>
+      <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" type="email" name="email" id="email" value={form?.email ?? ""} placeholder="Email"/>
     </div>
 
     <div class="flex flex-col">
-      <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" type="password" name="password" id="password" placeholder="Password" />
+      <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" type="password" name="password" id="password" placeholder="Password" />
     </div>
 
     <button
       type="submit"
-      class="bg-blue text-white py-3 rounded-full border-2 border-none hover:bg-medbg my-4"
+      class="bg-blue text-white py-3 rounded-full border-2 border-none hover:bg-lightbg my-4"
     >
       Log In
     </button>

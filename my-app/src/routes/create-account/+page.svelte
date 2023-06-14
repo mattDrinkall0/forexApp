@@ -9,7 +9,7 @@
 <div class="max-w-lg mx-auto">
   {#if form?.messages}
     <ul
-      class="bg-red-100 border-red-300 border-2 p-6 mt-3 mb-10 rounded-md text-red list-disc dark:bg-lightbg dark:border-none dark:text-red"
+      class="bg-red-100 border-red-300 border-2 p-6 mt-3 mb-10 rounded-md text-red list-disc dark:bg-medbg dark:border-none dark:text-red"
     >
       {#each form?.messages as message}
         <li class="ml-4">{message}</li>
@@ -19,13 +19,13 @@
 
   <form method="POST" class="flex flex-col gap-4" use:enhance>
     <div class="grid grid-cols-2 gap-4">
-      <input class="w-full dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" placeholder="First Name" type="text" name="firstName" id="first-name" />
-      <input class="w-full dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" placeholder="Last Name" type="text" name="lastName" id="last-name" />
+      <input class="w-full dark:bg-medbg dark:border-none dark:focus:bg-medbg" placeholder="First Name" type="text" name="firstName" id="first-name" />
+      <input class="w-full dark:bg-medbg dark:border-none dark:focus:bg-medbg" placeholder="Last Name" type="text" name="lastName" id="last-name" />
     </div>
 
-    <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" placeholder="Email" type="email" name="email" id="email" />
+    <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" placeholder="Email" type="email" name="email" id="email" />
 
-    <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg" placeholder="Password" type="password" name="password" id="password" />
+    <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" placeholder="Password" type="password" name="password" id="password" />
 
     <button
       type="submit"

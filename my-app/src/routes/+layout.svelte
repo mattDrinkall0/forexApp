@@ -7,15 +7,15 @@
 
   // Whenever the session changes, update the theme
   $: {
-    darkMode = $page.data.user?.darkMode ?? false;
+    darkMode = $page.data.user?.darkMode ?? true;
   }
 
   onMount(() => {
     function setTheme() {
       if (darkMode) {
-        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
       } else {
-        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
       }
     }
     // Whenever the session changes, update the theme
@@ -23,41 +23,46 @@
 
     // Cleanup function when the component unmounts
     return () => {
-      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
     }
   });
 
 </script>
 
-<header
-  class="flex justify-between py-5 px-10 max-w-screen-2xl mx-auto items-center dark:bg-bodybg dark:text-white relative z-20"
->
-  <a href="/" class="text-xl hover-fade">
-    <span class="font-bold">Alpha</span>Forex
-  </a>
+<header class="flex justify-between py-5 px-10 max-w-screen-2xl mx-auto items-center dark:bg-navbg dark:text-white relative z-20">
+  <!-- Logo -->
+  <div class="flex justify-start">
+    <a href="/" class="text-xl hover-fade">
+      <span class="font-bold">Alpha</span>Forex
+    </a>
+  </div>
 
-  <nav class="flex gap-10">
+  <!-- Navigation items -->
+  <div class="flex justify-center flex-grow">
+    <a href="/news" class="mx-3 hover-fade">News</a>
+    <a href="/about" class="mx-3 hover-fade">About Us</a>
+    <a href="/pricing" class="mx-3 hover-fade">Pricing</a>
     {#if $page.data.user}
-    <a href="/mystocks" class="hover-fade">My Stocks</a>
-    <a href="/news" class="hover-fade">News</a>
-    <a href="/about" class="hover-fade">About Us</a>
-    <a href="/pricing" class="hover-fade">Pricing</a>
-    <a href="/account" class="hover-fade">Account</a>
-
-    <form method="POST" action="/logout">
-      <button class="hover-fade" type="submit">Log Out</button>
-    </form>
-    {:else}
-      <a href="/news" class="hover-fade">News</a>
-      <a href="/about" class="hover-fade">About Us</a>
-      <a href="/pricing" class="hover-fade">Pricing</a>
-      <a href="/login" class="hover-fade">Login</a>
-      <a href="/create-account" class="hover-fade">Sign Up</a>
+      <a href="/mystocks" class="mx-3 hover-fade">My Stocks</a>
+      <a href="/account" class="mx-3 hover-fade">Account</a>
     {/if}
-  </nav>
+  </div>
+
+  <!-- Login / Sign up or Log out -->
+  <div class="flex justify-end">
+    {#if $page.data.user}
+      <form method="POST" action="/logout">
+        <button class="hover-fade" type="submit">Log Out</button>
+      </form>
+    {:else}
+      <a href="/login" class="mx-2 hover-fade">Login</a>
+      <a href="/create-account" class="mx-2 hover-fade">Sign Up</a>
+    {/if}
+  </div>
 </header>
 
-<div class="dark:bg-bodybg dark:text-white dark:caret-blue relative z-10 min-h-screen">
+
+<div class="dark:bg-navbg dark:text-white dark:caret-blue relative z-10 min-h-screen">
   <div class="max-w-screen-2xl mx-auto py-8 px-10">
     <slot />
   </div>
