@@ -48,8 +48,6 @@ export const actions = {
       const email = data.get("email");
       const darkModeVal = data.get("darkMode");
 
-      console.log(phoneNumber);
-
       var darkMode;
 
       if(darkModeVal != null){

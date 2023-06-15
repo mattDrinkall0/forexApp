@@ -31,6 +31,21 @@ module.exports = {
         '-10': '2.5rem',
         '-20': '-5rem'
        },
+
+       typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            // ...other properties
+            h2: {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              '-webkit-line-clamp': '2',
+              '-webkit-box-orient': 'vertical',
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [],
