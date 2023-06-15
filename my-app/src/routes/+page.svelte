@@ -119,21 +119,20 @@
 
       <div class="flex flex-col items-center justify-center my-16 relative z-10">
         <input class="
-        w-1/3 px-5 py-3 rounded-full border-2 border-black focus:outline-none focus:shadow-outline 
+        w-1/3 px-5 py-3 border-2 border-gray-500 focus:outline-none focus:shadow-outline 
         dark:bg-lightbg
-        dark:border-none
-        focus:rounded-bl-none focus:rounded-br-none focus:rounded-tl-md focus:rounded-tr-md" 
+        dark:border-none" 
         type="text" placeholder="Enter Stock..."
         bind:value={search} />
 
         {#if search !== ''}
-            <div class= "w-1/3 bg-white text-black shadow-lg max-h-60 rounded-bl-lg rounded-br-lg overflow-auto cursor-pointer dark:bg-medbg
+            <div class= "w-1/3 bg-white text-black shadow-lg cursor-pointer dark:bg-medbg
             dark:border-none dark:text-white">
                 {#if results.length === 0}
                     <div class="px-4 py-2">No results found</div>
                 {:else}
                     {#each results as result, i}
-                        <div class="border-t border-gray dark:border-white first:border-t-0 px-4 py-2 hover:bg-blue text-left" data-result={i} 
+                        <div class="dark:border-white px-4 py-2 hover:bg-gray-100 text-left dark:hover:bg-blue" data-result={i} 
                         on:click={() => selectSymbol(result.symbol)}>
                             <p>{ result.name} - <i>{ result.symbol }</i></p>
                         </div>

@@ -3,7 +3,7 @@ import { db } from "$lib/database";
 export async function load() {
   let key = 'K9A1VB4KEB375JED';
   let data;
-  const url = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&sort=LATEST&apikey=' + key;
+  const url = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&sort=LATEST&limit=100&apikey=' + key;
   const result = await fetch(url);
   
   // Checks if the API is working
@@ -14,6 +14,8 @@ export async function load() {
     data = await result.json();
   }
 
-  return { news: data['feed'] }
+  const validArticles = data['feed'].filter(article => 
+    article.summary && article.banner_image && article.source && (article.banner_image != "https://www.benzinga.com/next-assets/images/schema-image-default.png"));
 
+  return { news: validArticles }
 }
