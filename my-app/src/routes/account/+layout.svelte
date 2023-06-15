@@ -17,7 +17,7 @@
         href="/account/{link.url}"
         class="{$page.url.pathname.includes(`/${link.url}`)
           ? 'before:bg-blue before:w-1.5 before:h-9 before:top-1.5 before:absolute before:-left-3 before:rounded-full dark:bg-blue bg-gray-100'
-          : 'dark:hover:bg-lightbg hover:bg-blue'} relative py-4 px-4 last:rounded-b-md first:rounded-t-md">{link.name}</a
+          : 'dark:hover:bg-lightbg hover:bg-blue'} relative py-4 px-4">{link.name}</a
       >
     {/each}
   </div>

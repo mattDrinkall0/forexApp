@@ -19,16 +19,16 @@
 
   <form method="POST" class="flex flex-col gap-4" use:enhance>
     <div class="flex flex-col">
-      <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" type="email" name="email" id="email" value={form?.email ?? ""} placeholder="Email"/>
+      <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg" type="email" name="email" id="email" value={form?.email ?? ""} placeholder="Email"/>
     </div>
 
     <div class="flex flex-col">
-      <input class="dark:bg-medbg dark:border-none dark:focus:bg-medbg" type="password" name="password" id="password" placeholder="Password" />
+      <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg" type="password" name="password" id="password" placeholder="Password" />
     </div>
 
     <button
       type="submit"
-      class="bg-blue text-white py-3 rounded-full border-2 border-none hover:bg-lightbg my-4"
+      class="bg-blue text-white py-3 border-2 border-none hover:bg-lightbg my-4 transition-all duration-200"
     >
       Log In
     </button>
@@ -43,6 +43,6 @@
 
 <style>
   input {
-    @apply border-2 border-gray-400 py-3 px-5 my-1 rounded-full focus:outline-none focus:shadow-outline focus:bg-gray-100;
+    @apply border-2 border-gray-400 py-3 px-5 my-1 focus:outline-none focus:shadow-outline focus:bg-gray-100;
   }
 </style>

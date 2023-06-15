@@ -16,17 +16,17 @@
       <div class="grid grid-cols-2 gap-4 mt-4">
         <div>
           <label class="block dark:text-gray-300" for="first-name">First Name</label>
-          <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg w-full" type="text" name="firstName" id="first-name" value="{data.user.firstName}"/>
+          <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg w-full" type="text" name="firstName" id="first-name" value="{data.user.firstName}"/>
         </div>
         <div>
           <label class="block dark:text-gray-300" for="last-name">Last Name</label>
-          <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg w-full" type="text" name="lastName" id="last-name" value="{data.user.lastName}"/>
+          <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg w-full" type="text" name="lastName" id="last-name" value="{data.user.lastName}"/>
         </div>
       </div>
   
       <div class="mt-4">
         <label class="block dark:text-gray-300" for="phone">Phone Number</label>
-        <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg w-full" type="text" name="phone" id="phone" value="{data.user.phoneNumber}"/>
+        <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg w-full" type="text" name="phone" id="phone" value="{data.user.phoneNumber}"/>
       </div>
     </div>
   
@@ -36,7 +36,7 @@
   
       <div class="mt-4">
         <label class="block dark:text-gray-300" for="email">Email Address</label>
-        <input class="dark:bg-lightbg dark:border-none dark:focus:bg-lightbg w-full" type="email" name="email" id="email" value="{data.user.email}"/>
+        <input class="dark:bg-medbg dark:border-none dark:focus:bg-bodybg w-full" type="email" name="email" id="email" value="{data.user.email}"/>
       </div>
   
       <div class="mt-4 grid grid-cols-1 gap-2">
@@ -67,7 +67,7 @@
     <div class="flex justify-start">
     <button
       type="submit"
-      class="bg-blue text-white py-3 px-8 rounded-full border-2 border-none hover:bg-lightbg"
+      class="bg-blue text-white py-3 px-8 rounded-full border-2 border-none hover:bg-medbg transition-all duration-200"
     >
       Save Changes
     </button>
@@ -78,6 +78,6 @@
 
 <style>
     input {
-      @apply border-2 border-gray-400 py-2 px-5 my-1 rounded-full focus:outline-none focus:shadow-outline focus:bg-gray-100;
+      @apply border-2 border-gray-400 py-2 px-5 my-1 focus:outline-none focus:shadow-outline focus:bg-gray-100;
     }
 </style>
