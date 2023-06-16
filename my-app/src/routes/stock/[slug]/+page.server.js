@@ -1,5 +1,6 @@
 import { db } from "$lib/database";
 import {formatDate} from "$lib/formatDate";
+import { redirect } from "@sveltejs/kit";
 
 export async function load({ params, cookies }) {
 	const slug = params.slug;
@@ -30,6 +31,13 @@ export async function load({ params, cookies }) {
             }
         }
     });
+
+    // Checks if the user has a key
+    if(!session.user.key){
+        // Redirects them to the API key page
+        throw redirect(303, "/account/apiKey");
+    }
+
 
     const key = session.user.key;
     const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + slug + '&apikey=' + key;
