@@ -14,6 +14,7 @@ module.exports = {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+      'green': '#00FF00',
       'navbg': '#121212',
       'bodybg': '#212121',
       'blue': '#2196f3',

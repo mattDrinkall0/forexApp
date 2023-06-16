@@ -14,6 +14,12 @@
     let reversedWeekNames = data.weekNames.slice().reverse();
     let reversedWeekPrices = data.weekPrices.slice().reverse();
 
+    let before = data.weekPrices[1];
+    let after = data.weekPrices[0];
+    let percentage = ((after - before) / before) * 100;
+    $: sign = percentage < 0 ? '' : '+';
+    $: signColor = percentage < 0 ? '#cc0000' : '#00FF00';
+
     let chartData = {
     labels: reversedWeekNames,
     datasets: [
@@ -68,7 +74,10 @@
     <p class="text-gray-200"> &#903; {data.symbol}</p>
 </div>
 
-<h1 class="text-4xl dark:text-gray my-2">${data.weekPrices[0]}</h1>
+<div class="flex gap-8 text-4xl my-2">
+  <h1>${data.weekPrices[0]}</h1>
+  <h1 style="color:{signColor}">{sign}{percentage.toFixed(2)}%</h1>
+</div>
 
 <div class="flex w-full">
     <div class="w-2/3">

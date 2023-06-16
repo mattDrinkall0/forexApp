@@ -11,7 +11,7 @@
 </script>
 
 <div class="flex gap-6">
-  <div class="flex flex-col min-w-[14rem] dark:bg-medbg dark:rounded-lg">
+  <div class="flex flex-col min-w-[14rem] dark:bg-medbg">
     {#each nav as link}
       <a
         href="/account/{link.url}"
