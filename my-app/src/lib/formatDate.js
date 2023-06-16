@@ -22,5 +22,8 @@ export function formatTime(str) {
     return `${hour}:${minute}`;
 }
 
-
+export function formatLabel(dateString) {
+  var options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
   
