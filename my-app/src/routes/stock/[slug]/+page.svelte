@@ -106,6 +106,8 @@ function updateChart(newSliceVal) {
 
   </script>
 
+
+
 <div class="text-left">
     <h1 class="text-4xl my-2 font-bold">{data.name}</h1>
     <p> <b>&#903;</b> {data.symbol}</p>

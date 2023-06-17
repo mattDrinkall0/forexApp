@@ -1,4 +1,5 @@
 import { db } from "$lib/database";
+import { redirect } from "@sveltejs/kit";
 
 export async function load() {
   let key = 'K9A1VB4KEB375JED';
@@ -13,6 +14,10 @@ export async function load() {
   else{
     data = await result.json();
   }
+
+  if(!data['feed']){
+    throw redirect(303, "/free-plan");
+}
 
   const validArticles = data['feed'].filter(article => 
     article.summary && article.banner_image && article.source && (article.banner_image != "https://www.benzinga.com/next-assets/images/schema-image-default.png"));

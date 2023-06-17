@@ -18,6 +18,7 @@ model User {
   phoneNumber      String?
   darkMode         Boolean           @default(true)
   session          Session?
+  stocks           UserStocks[]
 }
 
 // This is a user's browser session, to keep them logged in etc.
@@ -31,4 +32,16 @@ model Companies {
   id          Int     @id @default(autoincrement())
   name        String
   symbol      String  @unique
+  userStocks  UserStocks[]
+}
+
+model UserStocks {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  stockId   Int
+  user      User        @relation(fields: [userId], references: [id])
+  stock     Companies   @relation(fields: [stockId], references: [id])
+  dateAdded   DateTime    @default(now())
+
+  @@unique([userId, stockId])
 }

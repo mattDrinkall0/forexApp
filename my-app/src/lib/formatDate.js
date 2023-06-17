@@ -26,4 +26,17 @@ export function formatLabel(dateString) {
   var options = { year: 'numeric', month: 'short', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }
-  
+
+// Format a date
+export function formatDBDate(dateStr) {
+  const suffixes = ["th", "st", "nd", "rd"];
+  const date = new Date(dateStr);
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = monthNames[date.getMonth()];
+
+  let suffix = (day <= 3 || day >= 21) ? suffixes[day % 10] : suffixes[0];
+
+  return `${day}${suffix} ${month} ${year}`;
+}

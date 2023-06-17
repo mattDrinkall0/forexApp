@@ -43,16 +43,21 @@ export async function load({ params, cookies }) {
     const key = session.user.key;
     const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + slug + '&apikey=' + key;
     const result = await fetch(url);
+
     let data;
   
     // Checks if the API is working
     if(!result.ok){
-      console.log("News API Error: " + result.status);
+      console.log("News API Error3: " + result.status);
     }
     else{
       data = await result.json();
     }
-    
+
+    if(!data['Weekly Time Series']){
+        throw redirect(303, "/free-plan");
+    }
+
     const weeklyData = data['Weekly Time Series'];
 
     let weekNames = [];
@@ -84,10 +89,10 @@ export async function load({ params, cookies }) {
     
     // Checks if the API is working
     if(newsResult.status == 429){
-        console.log("News API Error: " + newsResult.status);
+        console.log("News API Error1: " + newsResult.status);
     }
     else if(!newsResult.ok){
-      console.log("News API Error: " + newsResult.status);
+      console.log("News API Error2: " + newsResult.status);
     }
     else{
         newsData = await newsResult.json();
@@ -104,10 +109,8 @@ export async function load({ params, cookies }) {
             // Gets the average sentiment score
             sentimentScore = (sentimentScore / validArticles.length);
         } else {
-            console.log("Invalid response data from the News API");
+            console.log("Invalid response data API4, out of API calls?");
         }
     }
-
-
     return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume, news: validArticles, sentimentScore: sentimentScore.toFixed(2)};
 }

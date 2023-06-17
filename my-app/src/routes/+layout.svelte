@@ -43,7 +43,7 @@
     <a href="/about" class="mx-3 hover-fade">About Us</a>
     <a href="/pricing" class="mx-3 hover-fade">Pricing</a>
     {#if $page.data.user}
-      <a href="/mystocks" class="mx-3 hover-fade">My Stocks</a>
+      <a href="/account/myStocks" class="mx-3 hover-fade">My Stocks</a>
       <a href="/account" class="mx-3 hover-fade">Account</a>
     {/if}
   </div>
