@@ -6,11 +6,11 @@
   
     export let data;
 
-    let value = 0.2; // Input value, set it to your variable
-    let sentimentValue = -0.12;
+    let value = 0; // Input value, set it to your variable
+    let sentimentValue = parseFloat(data.sentimentScore);
 
-    $: position = ((value + 1) * 50) + '%';
-    $: sentimentPosition = ((sentimentValue + 1) * 50) + '%';
+    $: position = ((value + 1) * 50) - 2.5 + '%';
+    $: sentimentPosition = ((sentimentValue + 1) * 50) - 2.5 + '%';
 
     let sliceVal = 140;
     const sliceOptions = {
@@ -196,7 +196,60 @@ function updateChart(newSliceVal) {
   </div>
 
   <div>
-    <h1 class="text-2xl mb-1 mt-8 dark:dark:text-gray-100 font-semibold">Related News</h1>
+    <h1 class="text-2xl mb-6 mt-8 dark:dark:text-gray-100 font-semibold">Related News</h1>
+
+    <div>
+      {#if !(data.news.length > 2)}
+        <h1>No news found</h1>
+      {:else}
+        <div class="flex justify-left gap-5">
+          {#each data.news.slice(0,3) as news, index (news.url)}
+          
+            <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
+              <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+              <div class="absolute bottom-0 left-0">
+                <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
+                <p class="text-sm mb-2 px-6">{news.source}</p>
+              </div>
+            </a>
+          {/each}
+
+        </div>
+
+        {#if data.news.length > 4}
+          <div class="flex justify-left gap-5">
+            {#each data.news.slice(3,5) as news, index (news.url)}
+            
+              <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
+                <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+                <div class="absolute bottom-0 left-0">
+                  <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
+                  <p class="text-sm mb-2 px-6">{news.source}</p>
+                </div>
+              </a>
+            {/each}
+
+          </div>
+        {/if}
+
+        {#if data.news.length > 8}
+          <div class="flex justify-left gap-5">
+            {#each data.news.slice(5,9) as news, index (news.url)}
+            
+              <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
+                <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+                <div class="absolute bottom-0 left-0">
+                  <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
+                  <p class="text-sm mb-2 px-6">{news.source}</p>
+                </div>
+              </a>
+            {/each}
+
+          </div>
+        {/if  }
+      {/if}
+
+    </div>
   </div>
   
 

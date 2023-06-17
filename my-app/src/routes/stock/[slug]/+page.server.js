@@ -1,6 +1,7 @@
 import { db } from "$lib/database";
 import {formatDate} from "$lib/formatDate";
 import { redirect } from "@sveltejs/kit";
+import { parse } from "cookie";
 
 export async function load({ params, cookies }) {
 	const slug = params.slug;
@@ -73,7 +74,40 @@ export async function load({ params, cookies }) {
     let high = weeklyData[firstDate]['2. high'];
     let low = weeklyData[firstDate]['3. low'];
     let volume = weeklyData[firstDate]['5. volume'];
-    
 
-    return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume}
+    // Gets the news sentiment data
+    let newsData;
+    const newsUrl = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=' + slug +'&sort=LATEST&limit=50&apikey=' + key;
+    const newsResult = await fetch(newsUrl);
+    let sentimentScore = 0.000;
+    let validArticles = [];
+    
+    // Checks if the API is working
+    if(newsResult.status == 429){
+        console.log("News API Error: " + newsResult.status);
+    }
+    else if(!newsResult.ok){
+      console.log("News API Error: " + newsResult.status);
+    }
+    else{
+        newsData = await newsResult.json();
+        if(newsData && newsData['feed']) {
+            validArticles = newsData['feed'].filter(article => 
+                article.summary && article.banner_image && article.source && 
+                (article.banner_image != "https://www.benzinga.com/next-assets/images/schema-image-default.png"));
+        
+            // Gets the sentiment score
+            for (let article of validArticles) {
+                sentimentScore += parseFloat(article.overall_sentiment_score);
+            }
+        
+            // Gets the average sentiment score
+            sentimentScore = (sentimentScore / validArticles.length);
+        } else {
+            console.log("Invalid response data from the News API");
+        }
+    }
+
+
+    return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume, news: validArticles, sentimentScore: sentimentScore.toFixed(2)};
 }
