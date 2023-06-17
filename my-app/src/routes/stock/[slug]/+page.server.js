@@ -63,7 +63,17 @@ export async function load({ params, cookies }) {
         // Saves as a float
         weekPrices.push(parseFloat(weeklyData[week]['4. close']));
     }
+
+    // Get the first date in the "Weekly Time Series"
+    let firstDate = weekNames[0];
+
+    // Get the open value for the first date
+    let open = weeklyData[firstDate]['1. open'];
+    let close = weeklyData[firstDate]['4. close'];
+    let high = weeklyData[firstDate]['2. high'];
+    let low = weeklyData[firstDate]['3. low'];
+    let volume = weeklyData[firstDate]['5. volume'];
     
 
-    return{ symbol: slug, name: companyName.name, weekNames, weekPrices}
+    return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume}
 }

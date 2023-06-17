@@ -14,17 +14,20 @@
 
     let sliceVal = 140;
     const sliceOptions = {
-      "1D": 140,
-      "1W": 7,
-      "1M": 30,
-      "3M": 90,
-      "6M": 180,
-      "1Y": 365,
+      "1D": 15,
+      "1W": 30,
+      "1M": 50,
+      "3M": 70,
+      "6M": 100,
+      "1Y": 140,
       "Max": data.weekPrices.length,
     }
 
-    let reversedWeekNames = data.weekNames.slice(0, sliceVal).slice().reverse();
-    let reversedWeekPrices = data.weekPrices.slice(0, sliceVal).slice().reverse();
+    const originalNames = data.weekNames;
+    const originalPrices = data.weekPrices;
+
+    let reversedWeekNames = data.weekNames.slice().reverse();
+    let reversedWeekPrices = data.weekPrices.slice().reverse();
 
     let before = data.weekPrices[1];
     let after = data.weekPrices[0];
@@ -50,9 +53,11 @@
     ],
   };
 
+  let chart;
+
   onMount(() => {
   const ctx = document.getElementById("chart").getContext("2d");
-  const chart = new Chart(ctx, {
+  chart = new Chart(ctx, {
     type: "line",
     data: chartData,
     options: {
@@ -89,9 +94,19 @@
     },
   });
 });
+
+function updateChart(newSliceVal) {
+  let chartNames = originalNames.slice(0, newSliceVal).slice().reverse();
+  let chartPrices = originalPrices.slice(0, newSliceVal).slice().reverse();
+
+  chart.data.labels = chartNames;
+  chart.data.datasets[0].data = chartPrices;
+  chart.update();
+}
+
   </script>
 
-<div class="text-left mb-6">
+<div class="text-left">
     <h1 class="text-4xl my-2 font-bold">{data.name}</h1>
     <p> <b>&#903;</b> {data.symbol}</p>
 </div>
@@ -105,7 +120,7 @@
   {#each Object.keys(sliceOptions) as option (option)}
     <button 
       class="px-4 w-full py-2 opacity-50 dark:border-none border bg-gray-300 hover:bg-gray-400 dark:bg-medbg dark:hover:bg-lightbg" 
-      on:click={() => {sliceVal = sliceOptions[option];}}>
+      on:click={() => {sliceVal = sliceOptions[option]; updateChart(sliceOptions[option]);}}>
       {option}
     </button>
   {/each}
@@ -150,34 +165,38 @@
           <div class="w-full flex justify-between">
             <p>Open</p>
             <p>-</p>
-            <p>147.56</p>
+            <p>{parseFloat(data.open).toFixed(2)}</p>
           </div>
 
           <div class="w-full flex justify-between">
             <p>Close</p>
             <p>-</p>
-            <p>32.56</p>
+            <p>{parseFloat(data.close).toFixed(2)}</p>
           </div>
 
           <div class="w-full flex justify-between">
             <p>High</p>
             <p>-</p>
-            <p>56.64</p>
+            <p>{parseFloat(data.high).toFixed(2)}</p>
           </div>
 
           <div class="w-full flex justify-between">
             <p>Low</p>
             <p>-</p>
-            <p>3.67</p>
+            <p>{parseFloat(data.low).toFixed(2)}</p>
           </div>
 
           <div class="w-full flex justify-between col-span-2">
             <p>Volume</p>
             <p>-</p>
-            <p>16000</p>
+            <p>{data.volume}</p>
           </div>
         </div>
     </div>
+  </div>
+
+  <div>
+    <h1 class="text-2xl mb-1 mt-8 dark:dark:text-gray-100 font-semibold">Related News</h1>
   </div>
   
 
