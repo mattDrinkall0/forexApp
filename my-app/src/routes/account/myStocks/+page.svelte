@@ -73,7 +73,7 @@
           type="submit"
           on:click={() => (stockId = stock.id)}
           formaction="?/removeStock"
-          class="p-2 mr-8 font-medium hover:scale-150 ease-in-out duration-300"
+          class="p-2 mr-8 font-medium hover:scale-150 ease-in-out duration-300 text-red"
         >
           <Cross />
         </button>

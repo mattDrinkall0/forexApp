@@ -109,8 +109,75 @@ export async function load({ params, cookies }) {
             // Gets the average sentiment score
             sentimentScore = (sentimentScore / validArticles.length);
         } else {
-            console.log("Invalid response data API4, out of API calls?");
+            console.log("News Sentiment API Error: " + newsResult.status);
         }
     }
-    return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume, news: validArticles, sentimentScore: sentimentScore.toFixed(2)};
+
+
+    // Gnews API for actual news articles
+    const gNewsApi = 'c9e165d8457c40a1102c06b618fd080b';
+    // Define a list of suffixes to remove
+    const suffixes = [
+        " plc",
+        " Inc",
+        " Ltd",
+        " LLC",
+        " Corp",
+        " Co",
+        " Company",
+        " Incorporated",
+        " Limited",
+        " Corporation",
+        " & Co",
+        " & Co.",
+        " Group",
+        " Holdings",
+        " International",
+        " Services",
+        " Technologies",
+        " Solutions",
+        " Systems",
+        " Partners",
+        " Ventures",
+        " Enterprises",
+        " Associates",
+        " Investments",
+        " Global",
+        " Industries",
+        " Incubator",
+        " Lab",
+        " Software",
+        " Networks",
+        " Consulting",
+        " - Class C",
+        " - Class A",
+        " - Class B",
+      ];
+      
+
+    // Remove the suffixes
+    let shortCompanyName = companyName.name;
+    for (let suffix of suffixes) {
+    shortCompanyName = shortCompanyName.replace(new RegExp("\\b" + suffix + "\\b", "gi"), "");
+    }
+
+    const gNewsUrl = 'https://gnews.io/api/v4/search?q=' + shortCompanyName + '&lang=en&country=us&max=10&apikey=' + gNewsApi;
+    const gNewsResult = await fetch(gNewsUrl);
+    let gNewsData;
+    let gNewsArticles = [];
+
+    if(!gNewsResult.ok){
+        console.log("GNews API Error: " + gNewsResult.status);
+    }
+    else{
+        gNewsData = await gNewsResult.json();
+
+        if(gNewsData['articles']){
+            gNewsArticles = gNewsData['articles'];
+        }
+        
+    }
+
+
+    return{ symbol: slug, name: companyName.name, weekNames, weekPrices, open, close, high, low, volume, news: gNewsArticles, sentimentScore: sentimentScore.toFixed(2)};
 }

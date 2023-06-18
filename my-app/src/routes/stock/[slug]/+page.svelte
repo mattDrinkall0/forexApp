@@ -208,10 +208,10 @@ function updateChart(newSliceVal) {
           {#each data.news.slice(0,3) as news, index (news.url)}
           
             <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
-              <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+              <img src={news.image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
               <div class="absolute bottom-0 left-0">
                 <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
-                <p class="text-sm mb-2 px-6">{news.source}</p>
+                <p class="text-sm mb-2 px-6">{news.source.name}</p>
               </div>
             </a>
           {/each}
@@ -223,10 +223,10 @@ function updateChart(newSliceVal) {
             {#each data.news.slice(3,5) as news, index (news.url)}
             
               <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
-                <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+                <img src={news.image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
                 <div class="absolute bottom-0 left-0">
                   <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
-                  <p class="text-sm mb-2 px-6">{news.source}</p>
+                  <p class="text-sm mb-2 px-6">{news.source.name}</p>
                 </div>
               </a>
             {/each}
@@ -239,10 +239,10 @@ function updateChart(newSliceVal) {
             {#each data.news.slice(5,9) as news, index (news.url)}
             
               <a href={news.url} class="relative dark:border-none border shadow-md transform transition-all duration-200 hover:scale-105 flex flex-col mb-8 max-h-80">
-                <img src={news.banner_image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
+                <img src={news.image} alt={news.title} class="w-full h-full object-cover dark:opacity-40 opacity-50"/>
                 <div class="absolute bottom-0 left-0">
                   <h1 class="text-xl font-bold mb-2 line-clamp-2 px-6 w-2/3">{news.title}</h1>
-                  <p class="text-sm mb-2 px-6">{news.source}</p>
+                  <p class="text-sm mb-2 px-6">{news.source.name}</p>
                 </div>
               </a>
             {/each}
